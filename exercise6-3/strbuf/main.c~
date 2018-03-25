@@ -51,7 +51,6 @@ main ( int argc, char *argv[] )
 			free(string);
 		}
 		//printf("\t%d\n", list_size(listPtr));
-		//03/25/2018 01:48:45 PM
 	}
 	while (getlineReturn != EOF);
 
