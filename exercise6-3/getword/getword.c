@@ -21,16 +21,40 @@
 #include	<string.h>
 #include	<ctype.h>
 
+
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  getword
  *  Description:  Return a word from a line of input
  * =====================================================================================
  */
-	char *
-getword (const char *line)
+	int 
+getword (const char *line, int *position, char **word)
 {
-	char *word;
+	int length;
 
-	return word;
+	// Iterate through non alpha characters
+	while (!isalpha(line[*position])) {
+		if (line[*position] == '\0') {
+			return -1;
+		}
+		++(*position);
+	}
+
+	// Get word length (up until next non alpha char)
+	for (length = 0; isalpha(line[*position + length]); ++length);
+
+	// Allocate room for word
+	*word = malloc(sizeof(char) * length);
+
+	// Copy word
+	for (int i = 0; i < length; ++i) {
+		(*word)[i] = line[*position];
+		*position += 1;
+	}
+
+	// Add string terminator
+	(*word)[length] = '\0';
+
+	return length;
 }		/* -----  end of function getword  ----- */
