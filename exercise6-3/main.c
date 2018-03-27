@@ -1,53 +1,41 @@
-#include <stdio.h>
-
 /*
- * 	define linked list structure
-*/
+ * =====================================================================================
+ *
+ *       Filename:  main.c
+ *
+ *    Description:  Exercise 6-3. Write a cross-referencer that prints a list of all
+ *                                words in a document, and, for each word, a list of
+ *                                the line numbers on which it occurs. Remove noise
+ *                                words like "the," "and," and so on.
+ *
+ *        Version:  1.0
+ *        Created:  03/26/2018 09:39:00 PM
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Bo Salvadalena, bxsalvadalena01@students.everettcc.edu
+ *   Organization:  
+ *
+ * =====================================================================================
+ */
 
-struct word_list {
+#include	<stdlib.h>
+#include	<stdio.h>
+#include	<string.h>
+#include	"bitree/bitree.h"
 
-	char			*word
-	unsigned int		*line;
-	unsigned int		*eolp;
-	struct list		*next;
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  main
+ *  Description:  Main function
+ * =====================================================================================
+ */
+	int
+main ( int argc, char *argv[] )
+{
+	BiTree tree;
 
-};
+	bitree_init(&tree, free);
 
-/*
- * 	global variables
-*/
-
-int current_line = 0;
-
-/*
- * 	list_init - initialize a struct word_list
-*/
-
-void list_init(struct word_list *wl) {
-
-	/*
-	 * 	create a pointer (to be used as an array) to hold line
-	 * 	numbers and point line to it
-	*/
-
-	int *temp = malloc(sizeof(int *));
-	wl.line = temp;
-	wl.eolp = wl.line;
-
-	wl->word = NULL;
-	wl->next = NULL;
-
-}
-
-/*
- * 	list_add_line - add a line number (ln) to the int array (line) in the
- * 			struct word_list (wl)
-*/
-
-void list_add_line(struct word_list *wl, static int ln) {
-
-	wl->eolp = ln;
-
-	wl.eolp = realloc(wl.line, sizeof(wl.line + 1));
-
-}
+	return EXIT_SUCCESS;
+}				/* ----------  end of function main  ---------- */
