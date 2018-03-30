@@ -18,7 +18,7 @@ PROG = exercise6-3
 .SUFFIXES : .o .c
 
 all : 
-	${CC} main.c bitree/bitree.[ch] -o ${PROG}.out
+	${CC} main.c bitree/bitree.[ch] getword/getword.[ch] -o ${PROG}.out
 
 clean :
 	rm ${PROG}.out

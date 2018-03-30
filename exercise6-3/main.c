@@ -23,6 +23,7 @@
 #include	<stdio.h>
 #include	<string.h>
 #include	"bitree/bitree.h"
+#include	"getword/getword.h"
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -33,9 +34,35 @@
 	int
 main ( int argc, char *argv[] )
 {
-	BiTree tree;
+	BiTree		tree, *treePtr;
+	int		(*compare)() = &strcmp;
+	char		*line;
+	char		*word;
+	int		lineLength;
+	int		wordLength;
+	ssize_t		lineSize;
 
-	bitree_init(&tree, free);
+	/* Initialize binary tree */
+	treePtr = &tree;
+	bitree_init(treePtr, free);
+	treePtr->compare = compare;
+
+	do {
+		int linePosition = 0;
+		lineLength = 0;
+		line = NULL;
+
+		/* Get a line until EOF, grab each word, add to tree */
+		if ((lineSize = getline(&line, &lineLength, stdin)) > 0) {
+			while (getword(line, &linePosition, &word) >= 0) {
+				printf("%s ", word);
+				free(word);
+			}
+			printf("\n");
+			free(line);
+		}
+	}
+	while (lineSize >= 0);
 
 	return EXIT_SUCCESS;
 }				/* ----------  end of function main  ---------- */
